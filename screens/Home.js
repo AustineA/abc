@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { LinearGradient } from "expo-linear-gradient";
 import { FlatGrid } from "react-native-super-grid";
 import { SafeAreaView, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Letters } from "../shared/Data";
+import Modal from "../components/Modal";
 
-export default function Home() {
+const Home = () => {
+  const [isActive, setIsActive] = useState("none");
+  const [letter, setLetter] = useState(require("../assets/For_A.png"));
   return (
     <Container>
+      <Modal isModal={isActive} letter={letter} />
       <LinearGradient
         colors={["#fbd859", "#ff7800"]}
         style={{
@@ -19,7 +24,6 @@ export default function Home() {
         }}
       >
         <SafeAreaView>
-          {console.log(Letters)}
           <FlatGrid
             itemDimension={130}
             items={Letters}
@@ -27,6 +31,8 @@ export default function Home() {
               <TouchableOpacity
                 key={index}
                 onPress={() => {
+                  setIsActive("flex");
+                  setLetter(Letters[index].for);
                   console.log("You clicked", index);
                 }}
               >
@@ -40,7 +46,9 @@ export default function Home() {
       </LinearGradient>
     </Container>
   );
-}
+};
+
+export default Home;
 
 const Container = styled.View`
   flex: 1;
