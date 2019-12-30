@@ -1,22 +1,28 @@
 import React from "react";
 import Home from "./screens/Home";
-import styled from "styled-components";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 
 const initialState = {
-  action: ""
+  isOpen: false,
+  letter: require("./assets/Letter_A.png"),
+  audio: ""
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "CLOSE_MODAL":
-      return { action: "closeModal" };
-      break;
+      return {
+        ...state,
+        isOpen: false
+      };
 
     case "OPEN_MODAL":
-      return { action: "openModal" };
-      break;
+      return {
+        letter: action.payload.letter,
+        isOpen: true,
+        audio: action.payload.audio
+      };
 
     default:
       return state;
