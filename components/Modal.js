@@ -1,6 +1,11 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import styled from "styled-components";
-import { Animated, Easing, TouchableWithoutFeedback } from "react-native";
+import {
+  Animated,
+  Easing,
+  TouchableWithoutFeedback,
+  InteractionManager
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Audio } from "expo-av";
 
@@ -22,9 +27,10 @@ const Modal = () => {
   };
 
   useLayoutEffect(() => {
-    toggleScale();
-    playAudio(audio);
-    console.log("Display is ", isOpen);
+    InteractionManager.runAfterInteractions(() => {
+      playAudio(audio);
+      console.log("Display is ", isOpen);
+    });
 
     return async () => {
       await soundObject.unloadAsync();

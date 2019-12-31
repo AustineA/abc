@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { LinearGradient } from "expo-linear-gradient";
 import { FlatGrid } from "react-native-super-grid";
@@ -16,6 +16,21 @@ const Home = () => {
     <>
       <Container>
         <>{isOpen && <Modal />}</>
+        {/* <>
+          {isOpen && (
+            <Mod>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch({
+                    type: "CLOSE_MODAL"
+                  });
+                }}
+              >
+                <Button>Click Me</Button>
+              </TouchableOpacity>
+            </Mod>
+          )}
+        </> */}
         <LinearGradient
           colors={["#fbd859", "#ff7800"]}
           style={{
@@ -62,13 +77,6 @@ const Container = styled.View`
   height: 100%;
   width: 100%;
   z-index: 10;
-`;
-
-const ExtraComponent = styled.View`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: transparent;
 `;
 
 const Mod = styled.View`
